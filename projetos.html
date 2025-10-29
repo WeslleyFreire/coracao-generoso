@@ -4,60 +4,55 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Projetos — Coração Generoso</title>
-  <meta name="description" content="Projetos sociais da ONG Coração Generoso: voluntariado e doações." />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="Projetos sociais da ONG Coração Generoso." />
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <img src="assets/images/logoprin.png" height="100px"  width="100px"     alt="logotipo">
-      <a href="index.html" class="brand"> Coração Generoso</a>
-      <nav class="main-nav" aria-label="Menu principal">
-        <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="projetos.html">Projetos</a></li>
-          <li><a href="cadastro.html">Cadastro</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <h1>Projetos Sociais</h1>
-
-    <section aria-labelledby="voluntariado">
-      <h2 id="voluntariado">Voluntariado</h2>
-      <p>Participe como voluntário em nossas ações: distribuição de alimentos, apoio educativo e oficinas de capacitação.</p>
-      <p><a class="btn" href="cadastro.html">Inscreva-se como voluntário</a></p>
-    </section>
-
-    <section aria-labelledby="doacoes">
-      <h2 id="doacoes">Como doar</h2>
-      <p>Apoie com alimentos não perecíveis, roupas em bom estado, materiais para oficinas ou contribuição financeira.</p>
-      <p>Para doações físicas, verifique nossos pontos de arrecadação e horários no contato.</p>
-    </section>
-
-    <section aria-labelledby="projetos-lista">
-      <h2 id="projetos-lista">Projetos em destaque</h2>
-      <ul class="projects-list">
-        <li>
-          <h3>Banco de Alimentos</h3>
-          <p>Distribuição semanal de cestas básicas para famílias cadastradas.</p>
+<header class="site-header">
+  <div class="container grid grid--align-center">
+    <a class="brand" href="index.html"> Coração Generoso</a>
+    <nav class="main-nav" aria-label="Menu principal">
+      <button class="hamburger" aria-expanded="false" aria-controls="menu-list" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <ul id="menu-list" class="nav-list">
+        <li><a href="index.html">Início</a></li>
+        <li class="has-sub"><a href="projetos.html">Projetos</a>
+          <ul class="submenu">
+            <li><a href="#voluntariado">Voluntariado</a></li>
+            <li><a href="#doacoes">Como doar</a></li>
+          </ul>
         </li>
-        <li>
-          <h3>Oficinas de Capacitação</h3>
-          <p>Curso gratuito de empreendedorismo e habilidades práticas para geração de renda.</p>
-        </li>
+        <li><a href="cadastro.html">Cadastro</a></li>
+        <li><a class="btn btn--ghost" href="#">Doar</a></li>
       </ul>
-    </section>
-  </main>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <h1 id="voluntariado">Voluntariado</h1>
+  <p>Participe como voluntário nas ações de distribuição, apoio e oficinas.</p>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Coração Generoso</p>
-    </div>
-  </footer>
+  <h2 id="doacoes">Como doar</h2>
+  <p>Doações de alimentos, roupas, materiais para oficinas e recursos financeiros são bem-vindas.</p>
 
-  <script src="js/main.js" defer></script>
+  <section class="projects-list grid grid--cols-12">
+    <article class="project col-6">
+      <h3>Banco de Alimentos</h3>
+      <p>Distribuição semanal para famílias cadastradas.</p>
+    </article>
+    <article class="project col-6">
+      <h3>Oficinas de Capacitação</h3>
+      <p>Capacitação para geração de renda local.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2025 Coração Generoso</p>
+  </div>
+</footer>
+<script src="js/ui.js" defer></script>
 </body>
 </html>
