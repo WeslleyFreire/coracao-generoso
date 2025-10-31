@@ -56,3 +56,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadPage(location.pathname);
 });
+export default {};
+
