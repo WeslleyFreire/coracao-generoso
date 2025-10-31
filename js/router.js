@@ -1,28 +1,58 @@
-export default class Router {
-  constructor(rootId = 'app') {
-    this.routes = {};
-    this.root = document.getElementById(rootId);
-    window.addEventListener('hashchange', () => this._onRouteChange());
-    window.addEventListener('load', () => this._onRouteChange());
+document.addEventListener("DOMContentLoaded", () => {
+  const routes = {
+    "/": "index.html",
+    "/projetos": "projetos.html",
+    "/cadastro": "cadastro.html",
+  };
+
+  const container = document.getElementById("main-content");
+
+  if (!container) {
+    console.error("❌ Elemento #main-content não encontrado!");
+    return;
   }
 
-  add(route, handler) {
-    this.routes[route] = handler;
-  }
+  async function loadPage(path) {
+    const route = routes[path] || routes["/"];
+    try {
+      const response = await fetch(route);
+      if (!response.ok) throw new Error("Erro ao carregar a página");
+      const html = await response.text();
 
-  async _onRouteChange() {
-    const hash = location.hash.replace(/^#/, '') || '/';
-    const handler = this.routes[hash] || this.routes['/404'] || this.routes['/'];
-    if (!handler) return;
-    const content = await handler();
-    this._render(content);
-  }
+      
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = html;
 
-  _render(content) {
-    if (typeof content === 'string') this.root.innerHTML = content;
-    else if (content instanceof HTMLElement) {
-      this.root.innerHTML = '';
-      this.root.appendChild(content);
+      const newContent = tempDiv.querySelector("main");
+      if (newContent) {
+        container.innerHTML = newContent.innerHTML;
+      } else {
+        console.warn("⚠️ Nenhum <main> encontrado na página carregada.");
+      }
+
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.error("Erro ao carregar página:", error);
+      container.innerHTML = `<p style="color:red;">Erro ao carregar a página.</p>`;
     }
   }
-}
+
+  
+  document.body.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    if (link && link.getAttribute("href")?.startsWith("/")) {
+      event.preventDefault();
+      const path = link.getAttribute("href");
+      history.pushState({}, "", path);
+      loadPage(path);
+    }
+  });
+
+  
+  window.addEventListener("popstate", () => {
+    loadPage(location.pathname);
+  });
+
+
+  loadPage(location.pathname);
+});
