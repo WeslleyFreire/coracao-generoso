@@ -1,4 +1,4 @@
-import Router from './router.js';
+
 import { templates } from './templates.js';
 import { validateFormElements } from './validation.js';
 import { saveRegistration } from './storage.js';
@@ -73,3 +73,8 @@ function attachBehaviors() {
     `).join('');
   }
 }
+document.addEventListener("DOMContentLoaded", async () => {
+  const script = document.createElement("script");
+  script.src = "./js/router.js";
+  document.body.appendChild(script);
+});
