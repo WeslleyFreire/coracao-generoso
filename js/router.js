@@ -19,29 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Erro ao carregar a página");
       const html = await response.text();
 
-      
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = html;
 
-      const newContent = tempDiv.querySelector("main");
-      if (newContent) {
-        container.innerHTML = newContent.innerHTML;
-      } else {
-        console.warn("⚠️ Nenhum <main> encontrado na página carregada.");
-      }
 
-      window.scrollTo(0, 0);
-    } catch (error) {
-      console.error("Erro ao carregar página:", error);
+      const newContent =
+        tempDiv.querySelector("main") || tempDiv.querySelector("body");
+
+      container.innerHTML = newContent ? newContent.innerHTML : html;
+    } catch (err) {
+      console.error(err);
       container.innerHTML = `<p style="color:red;">Erro ao carregar a página.</p>`;
     }
   }
 
-  
-  document.body.addEventListener("click", (event) => {
-    const link = event.target.closest("a");
+ 
+  document.body.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
     if (link && link.getAttribute("href")?.startsWith("/")) {
-      event.preventDefault();
+      e.preventDefault();
       const path = link.getAttribute("href");
       history.pushState({}, "", path);
       loadPage(path);
@@ -53,8 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(location.pathname);
   });
 
-
+  
   loadPage(location.pathname);
 });
-export default {};
-
